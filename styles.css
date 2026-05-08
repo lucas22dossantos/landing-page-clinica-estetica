@@ -1141,6 +1141,321 @@ details p {
     linear-gradient(135deg, #c8dbe6, #1a1c22);
 }
 
+/* ============================================================
+   ANIMACIONES AESTHETICA
+   ============================================================ */
+
+/* --- Utilidad base: elementos que van a animarse con scroll --- */
+.anim-hidden {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.anim-hidden.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays escalonados para grillas */
+.anim-hidden:nth-child(2) { transition-delay: 0.10s; }
+.anim-hidden:nth-child(3) { transition-delay: 0.18s; }
+.anim-hidden:nth-child(4) { transition-delay: 0.26s; }
+.anim-hidden:nth-child(5) { transition-delay: 0.34s; }
+.anim-hidden:nth-child(6) { transition-delay: 0.42s; }
+
+/* ---------------------------------------------------------------
+   1. HERO — Entrada con stagger
+--------------------------------------------------------------- */
+.hero-copy > * {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: hero-fadein 0.7s ease forwards;
+}
+
+.hero-copy h1            { animation-delay: 0.10s; }
+.hero-copy p             { animation-delay: 0.28s; }
+.hero-copy .hero-actions { animation-delay: 0.44s; }
+.hero-copy .social-proof { animation-delay: 0.56s; }
+
+.result-card {
+  opacity: 0;
+  animation: hero-fadein 0.7s ease 0.62s forwards;
+}
+
+@keyframes hero-fadein {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------
+   2. HEADER — Fondo sólido al hacer scroll
+--------------------------------------------------------------- */
+.site-header {
+  transition: background 0.35s ease, backdrop-filter 0.35s ease, box-shadow 0.35s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(7, 8, 10, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* ---------------------------------------------------------------
+   3. TREATMENT CARDS — Hover mejorado
+--------------------------------------------------------------- */
+.treatment-card {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.card-media {
+  transition: transform 0.55s ease;
+}
+
+.treatment-card:hover .card-media {
+  transform: scale(1.05);
+}
+
+.circle-link {
+  transition: transform 0.28s ease, background 0.28s ease, border-color 0.28s ease;
+}
+
+.treatment-card:hover .circle-link {
+  transform: translateX(4px) translateY(-4px);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #140804;
+}
+
+/* ---------------------------------------------------------------
+   4. MÉTRICAS — Números animados (JS los activa)
+--------------------------------------------------------------- */
+.metrics strong {
+  transition: color 0.3s ease;
+}
+
+/* ---------------------------------------------------------------
+   5. FAQ — Expand animado con chevron
+--------------------------------------------------------------- */
+/* NOTA: summary::after y details[open] summary::after
+   ya están definidos arriba en el CSS original (líneas ~809-815).
+   Acá solo extendemos la transition sin redefinir content ni color */
+summary::after {
+  transition: transform 0.3s ease;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+details p {
+  animation: faq-open 0.35s ease;
+}
+
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------------------------------------------------------------
+   6. CHIPS WHATSAPP — Transición activo + preview fade
+--------------------------------------------------------------- */
+.chips button {
+  transition: background 0.22s ease, color 0.22s ease,
+              border-color 0.22s ease, transform 0.18s ease;
+}
+
+.chips button:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.chips button.active {
+  transform: scale(1.03);
+}
+
+.message-bubble p {
+  transition: opacity 0.25s ease;
+}
+
+.message-bubble.updating p {
+  opacity: 0.4;
+}
+
+/* ---------------------------------------------------------------
+   7. MENÚ MOBILE — Slide-down suave
+--------------------------------------------------------------- */
+.nav-links {
+  transition: opacity 0.25s ease, transform 0.28s ease;
+}
+
+/* ---------------------------------------------------------------
+   8. BEFORE/AFTER — Animación inicial al entrar al viewport
+--------------------------------------------------------------- */
+.comparison {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.comparison:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------------------------------------------------------------
+   9. PRECIOS — Hover en cards
+--------------------------------------------------------------- */
+.price-card {
+  transition: transform 0.32s ease, box-shadow 0.32s ease, border-color 0.32s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+}
+
+.price-card.featured:hover {
+  box-shadow: 0 28px 70px rgba(255, 111, 79, 0.22);
+}
+
+/* ---------------------------------------------------------------
+   10. TESTIMONIOS — Quote mark entrada
+--------------------------------------------------------------- */
+.quote-card {
+  transition: transform 0.32s ease, box-shadow 0.32s ease;
+}
+
+/* Solo aplicar hover lift en desktop, no en el carrusel mobile */
+@media (min-width: 981px) {
+  .quote-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, 0.32);
+  }
+}
+
+.quote-mark {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.quote-card:hover .quote-mark {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* ---------------------------------------------------------------
+   11. BOTÓN WHATSAPP — Pulso suave
+--------------------------------------------------------------- */
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 214, 103, 0.45); }
+  50%       { box-shadow: 0 0 0 8px rgba(34, 214, 103, 0); }
+}
+
+.btn-whatsapp {
+  animation: wa-pulse 2.4s ease-in-out infinite;
+}
+
+.btn-whatsapp:hover {
+  animation: none;
+  transform: translateY(-2px);
+  background: #30e87a;
+}
+
+/* ---------------------------------------------------------------
+   12. SOCIAL LINKS — Ya tienen hover definido en el CSS base.
+   Nada extra necesario — las transiciones están en líneas ~1048-1056
+--------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------
+   Reducir movimiento para accesibilidad
+--------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   13. FOOTER LINKS — Hover con slide sutil
+--------------------------------------------------------------- */
+.footer-grid nav a {
+  display: inline-block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-grid nav a:hover {
+  color: var(--text);
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------------
+   14. CONTACT ROW — Hover highlight en datos de contacto
+--------------------------------------------------------------- */
+.contact-row span {
+  transition: color 0.2s ease;
+  cursor: default;
+}
+
+.contact-row span:hover {
+  color: var(--text);
+}
+
+.contact-row span:hover .material-symbols-outlined {
+  animation: icon-bounce 0.4s ease;
+}
+
+@keyframes icon-bounce {
+  0%, 100% { transform: translateY(0); }
+  40%       { transform: translateY(-4px); }
+  70%       { transform: translateY(-2px); }
+}
+
+/* ---------------------------------------------------------------
+   15. EYEBROW — Subrayado animado al entrar
+--------------------------------------------------------------- */
+.eyebrow {
+  position: relative;
+  display: inline-block;
+}
+
+/* ---------------------------------------------------------------
+   16. TEXT-LINK (Ver todos los servicios) — Flecha animada
+--------------------------------------------------------------- */
+.text-link .material-symbols-outlined {
+  transition: transform 0.22s ease;
+}
+
+.text-link:hover .material-symbols-outlined {
+  transform: translate(3px, -3px);
+}
+
+/* ---------------------------------------------------------------
+   17. BRAND LOGO — Shimmer hover
+--------------------------------------------------------------- */
+.brand {
+  transition: opacity 0.2s ease;
+}
+
+.brand:hover {
+  opacity: 0.75;
+}
+
+/* ---------------------------------------------------------------
+   18. BTN GHOST — Hover border fill animado
+--------------------------------------------------------------- */
+.btn-ghost {
+  transition: background 0.25s ease, color 0.25s ease,
+              border-color 0.25s ease, transform 0.2s ease;
+}
+
+.btn-ghost:hover {
+  transform: translateY(-1px);
+}
+
 @media (max-width: 980px) {
   .container {
     width: min(100% - 32px, var(--container));
@@ -1164,18 +1479,29 @@ details p {
     top: 66px;
     right: 16px;
     left: 16px;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    border: 1px solid var(--line);
     border-radius: 18px;
     background: rgba(13, 14, 18, 0.96);
-    padding: 12px;
+    /* Slide-down animado — reemplaza display:none del original */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 12px;
+    border: 1px solid transparent;
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.28s ease,
+                padding 0.28s ease, border-color 0.28s ease;
   }
 
   .nav-links.is-open {
-    display: flex;
+    max-height: 400px;
+    opacity: 1;
+    padding: 12px;
+    border-color: var(--line);
+    pointer-events: auto;
   }
 
   .nav-links a {
@@ -1200,11 +1526,35 @@ details p {
 
   .metrics-grid,
   .pricing-grid,
-  .testimonial-grid,
   .faq-grid,
   .reservation-grid,
   .footer-grid {
     grid-template-columns: 1fr;
+  }
+
+  .testimonial-grid {
+    display: flex;
+    gap: 18px;
+    margin-inline: -16px;
+    overflow-x: auto;
+    padding: 0 16px 12px;
+    scroll-padding-inline: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .testimonial-grid::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .testimonial-grid::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+
+  .quote-card {
+    flex: 0 0 min(82vw, 380px);
+    scroll-snap-align: start;
   }
 
   .metrics article {
